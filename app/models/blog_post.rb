@@ -43,18 +43,22 @@ class BlogPost
 
     BlogPost.new do |post|
       post.path = path
-      post.body = render_body(content)
+      post.body = Markdown.render(content)
       post.set_attributes(parse_meta(meta, path))
     end
   end
 
   private # --------------------------------------------------------------------
 
-  def self.render_body(body)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
-                                       :autolink => true,
-                                       :space_after_headers => true)
-    markdown.render(body)
+  def self.split_meta_and_content(all)
+    end_of_meta = all.index("*/")
+    if end_of_meta
+      meta = all[2, end_of_meta - 2].strip
+      content = all[end_of_meta + 2, all.length].strip
+      return [meta, content]
+    else
+      return ["", all]
+    end
   end
 
   def self.parse_meta(raw_meta, path)
@@ -71,16 +75,5 @@ class BlogPost
     end
 
     return meta
-  end
-
-  def self.split_meta_and_content(all)
-    end_of_meta = all.index("*/")
-    if end_of_meta
-      meta = all[2, end_of_meta - 2].strip
-      content = all[end_of_meta + 2, all.length].strip
-      return [meta, content]
-    else
-      return ["", all]
-    end
   end
 end
