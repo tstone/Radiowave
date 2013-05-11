@@ -10,7 +10,7 @@ require "spec_helper"
   end
 
   context "using the default store" do
-    it "should scan a directory for markdown files, calling the given block once each" do
+    it "should scan a directory for markdown files, including sub-directories, calling the given block once each" do
       counter = 0
       scanner.scan { counter += 1 }
       counter.should == fixture_files.length

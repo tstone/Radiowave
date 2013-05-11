@@ -6,7 +6,7 @@ class BlogPostScanner
   end
 
   def scan(&block)
-    Dir[@posts_path + "/*.md"].map do |post_path|
+    Dir[@posts_path + "/**/*.md"].map do |post_path|
       block.call(post_path) if block_given?
     end
   end
