@@ -35,7 +35,6 @@ group :test do
 end
 
 group :development, :test do
-  gem 'spring'
-  gem 'listen'
-  gem 'rb-fsevent', :require => false
+  gem 'zeus'
 end
+
