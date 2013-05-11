@@ -18,12 +18,11 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'zeus'
+  gem 'rspec-rails'
 end
 
 group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
 end
