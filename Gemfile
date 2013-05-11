@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 #gem 'rails', '4.0.0.rc1'
 
 gem 'actionpack', '4.0.0.rc1'
+gem 'activemodel', '4.0.0.rc1'
 gem 'railties', '4.0.0.rc1'
 gem 'tzinfo'
 
