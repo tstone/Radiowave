@@ -1,7 +1,5 @@
 
 class BlogPost
-  #extend ActiveSupport::Concern
-
   attr_accessor :body, :comments, :path, :tags
 
   def initialize(&block)

@@ -17,4 +17,8 @@ class BlogPostScanner
     end
   end
 
+  def scan_and_store
+    MemoryStore.new(scan_and_parse, BlogPost)
+  end
+
 end
