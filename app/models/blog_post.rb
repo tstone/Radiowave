@@ -1,25 +1,30 @@
 
 class BlogPost
-  attr_accessor :body, :path, :tags
+  #extend ActiveSupport::Concern
+
+  attr_accessor :body, :comments, :path, :tags
 
   def initialize(&block)
+    @comments = true
+    @tags = []
     block.call(self) if block_given?
   end
 
-  def comments
-    @comments
-  end
-
   def date
+    @date = File.ctime(@path) unless @date
     @date
-    #  File.ctime(@path)
   end
 
   def slug
+    @slug = title.parameterize unless @slug
     @slug
   end
 
   def title
+    unless @title
+      @title = File.basename(@path, File.extname(@path))
+      @title = @title.titleize
+    end
     @title
   end
 
