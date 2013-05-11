@@ -6,6 +6,7 @@ gem 'actionpack', '4.0.0.rc1'
 gem 'activemodel', '4.0.0.rc1'
 gem 'railties', '4.0.0.rc1'
 gem 'tzinfo'
+gem 'redcarpet'
 
 #gem 'jquery-rails'
 #gem 'turbolinks'

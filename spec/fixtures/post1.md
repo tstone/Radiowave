@@ -1,7 +1,7 @@
 /*
 title:  Example Markdown Post
 Date:   May 18, 2012
-TAGS:   [simple, easy, sample]
+TAGS:   [simple, Easy, SAMPLE]
 comments:  true
 slug:   totally-custom-slug
 */
