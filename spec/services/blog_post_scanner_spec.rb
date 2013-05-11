@@ -16,9 +16,13 @@ require "spec_helper"
       counter.should == fixture_files.length
     end
 
-    it "should return one blog post model for each blog post file in a given directory" do
+    it "should return one populated blog post model for each blog post file" do
       posts = scanner.scan_and_parse
       posts.length.should == fixture_files.length
+      posts.each do |post|
+        post.should be_a_kind_of BlogPost
+        # post.title.should_not be_empty
+      end
     end
   end
 
