@@ -1,13 +1,18 @@
 
 class BlogPostScanner
 
-  def initialize(posts_path, post_store=nil)
-    # todo: post stores
+  def initialize(posts_path)
     @posts_path = posts_path
   end
 
+  def scan(&block)
+    Dir[@posts_path + "/*.md"].map do |post_path|
+      block.call(post_path) if block_given?
+    end
+  end
+
   def scan_and_parse
-    Dir[@posts_path + "/*"].map do |post_path|
+    scan do |post_path|
       BlogPost.new
     end
   end
