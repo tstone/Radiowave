@@ -6,7 +6,10 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = BlogPost.find(params[:id])
+    id = params[:id]
+    @post = BlogPost.find(id)
+    @next_post = BlogPost.next(id)
+    @prev_post = BlogPost.prev(id)
   end
 
 end
