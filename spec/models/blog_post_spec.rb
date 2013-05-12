@@ -22,7 +22,9 @@ describe BlogPost do
     posts.first.slug.should == "totally-custom-slug"
   end
 
-  xit "should allow the user to specify a default for enabling comments" do
+  it "should allow the user to specify a default for enabling comments" do
+    Rails.application.config.settings.stub(:comments).and_return(false)
+    BlogPost.new.comments.should == false
   end
 
   context "initializing from a file" do

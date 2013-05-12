@@ -3,7 +3,7 @@ class BlogPost
   attr_accessor :body, :comments, :path, :tags
 
   def initialize(&block)
-    @comments = true
+    @comments = Rails.application.config.settings.comments
     @tags = []
     block.call(self) if block_given?
   end

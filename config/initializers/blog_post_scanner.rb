@@ -1,4 +1,5 @@
 
+require Rails.root.join("config/initializers/user_config")
 require Rails.root.join("config/initializers/markdown")
 
 if Rails.env.development? or Rails.env.test?
