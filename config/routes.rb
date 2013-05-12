@@ -48,5 +48,8 @@ Radiowave::Application.routes.draw do
   #   end
 
   root 'posts#index'
+
+  get 'page/:page' => 'posts#index', as: :post_page
   get 'post/:id' => 'posts#show', as: :post
+
 end

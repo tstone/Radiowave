@@ -2,7 +2,12 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = BlogPost.all
+    page = params[:page].to_i
+    page = 1 unless page > 0
+    page_size = 10
+    offset = (page - 1) * page_size
+
+    @posts = BlogPost.page(offset, page_size)
   end
 
   def show
