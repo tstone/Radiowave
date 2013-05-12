@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe PostsController do
+  before do
+    Rails.application.config.settings.stub(:count).and_return(10)
+  end
+
   describe "index" do
     it "should get the first page of blog posts" do
       BlogPost.should_receive(:page).with(0, 10).and_return((1..10).to_a)
