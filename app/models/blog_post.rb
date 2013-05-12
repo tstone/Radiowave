@@ -50,14 +50,31 @@ class BlogPost
 
   def self.find_with_tag(tag)
     tag = tag.downcase
-    if respond_to?(:all)
+    with_store do |all|
       all.select { |post| post.tags.include? tag }
-    else
-      []
+    end
+  end
+
+  def self.search(query)
+    with_store do |all|
+      all.select do |post|
+        post.body.include? query or
+        post.title.include? query or
+        post.tags.include? query or
+        post.slug.include? query
+      end
     end
   end
 
   private # --------------------------------------------------------------------
+
+  def self.with_store(&block)
+    if self.respond_to?(:all)
+      return block.call(all)
+    else
+      return []
+    end
+  end
 
   def self.split_meta_and_content(all)
     end_of_meta = all.index("*/")

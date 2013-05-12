@@ -16,6 +16,12 @@ describe BlogPost do
     posts.first.slug.should == "totally-custom-slug"
   end
 
+  it "should find posts by searching with a free text query" do
+    posts = BlogPost.search("inline code")
+    posts.length.should == 1
+    posts.first.slug.should == "totally-custom-slug"
+  end
+
   xit "should allow the user to specify a default for enabling comments" do
   end
 
