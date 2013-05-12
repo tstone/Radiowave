@@ -20,6 +20,12 @@ describe MemoryStore do
     store.all.map(&:id) =~ data.map(&:id)
   end
 
+  it "should return a given page of models" do
+    page = store.page(1, 1)
+    page.length.should == 1
+    page.first.title.should == "Post 2"
+  end
+
   it "should find models by identifier" do
     store.find("post1").id.should == "post1"
     store.find("post1").title.should == "Post 1"

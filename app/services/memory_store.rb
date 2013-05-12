@@ -10,6 +10,10 @@ module MemoryStore
     @list
   end
 
+  def page(offset, limit)
+    @list.slice(offset, limit)
+  end
+
   def find(id)
     @table[id.to_s]
   end
