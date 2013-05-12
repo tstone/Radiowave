@@ -1,6 +1,5 @@
 
 class BlogPost
-  #extend DataStorable
   attr_accessor :body, :comments, :path, :tags
 
   def initialize(&block)
@@ -46,6 +45,15 @@ class BlogPost
       post.path = path
       post.body = ::Markdown.render(content)
       post.set_attributes(parse_meta(meta, path))
+    end
+  end
+
+  def self.find_with_tag(tag)
+    tag = tag.downcase
+    if respond_to?(:all)
+      all.select { |post| post.tags.include? tag }
+    else
+      []
     end
   end
 

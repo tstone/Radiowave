@@ -10,6 +10,12 @@ describe BlogPost do
     subject.slug.should == "test"
   end
 
+  it "should find posts that include a given tag" do
+    posts = BlogPost.find_with_tag("simple")
+    posts.length.should == 1
+    posts.first.slug.should == "totally-custom-slug"
+  end
+
   xit "should allow the user to specify a default for enabling comments" do
   end
 
