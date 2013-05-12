@@ -3,10 +3,12 @@ require "spec_helper"
 describe MemoryStore do
   let(:data) {[ OpenStruct.new(id: 1, title: "1"), OpenStruct.new(id: 2, title: "2") ]}
   let(:store) {
-    C = Class.new
-    C.class.send(:include, MemoryStore)
-    C.initialize_store(data)
-    C
+    unless defined? MemoryStoreTestObject
+      MemoryStoreTestObject = Class.new
+      MemoryStoreTestObject.class.send(:include, MemoryStore)
+      MemoryStoreTestObject.initialize_store(data)
+    end
+    MemoryStoreTestObject
   }
 
   it "should return all of the models" do

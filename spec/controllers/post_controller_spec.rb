@@ -9,8 +9,8 @@ describe PostsController do
   end
 
   describe "show" do
-    it "should get all the blog posts" do
-      BlogPost.stub(:find).and_return(OpenStruct.new(title: "Example", slug: "example"))
+    it "should get the specified the blog posts" do
+      BlogPost.should_receive(:find).with("example").and_return(OpenStruct.new(title: "Example", slug: "example"))
       get :show, id: "example"
       assigns(:post).should be_present
     end
