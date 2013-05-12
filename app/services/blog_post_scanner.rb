@@ -6,15 +6,17 @@ class BlogPostScanner
   end
 
   def scan(&block)
-    Dir[@posts_path + "/**/*.*"].map do |post_path|
+    scan_path = File.join(@posts_path, "**/*.*")
+    Dir[scan_path].map do |post_path|
       block.call(post_path) if block_given?
     end
   end
 
   def scan_and_parse
-    scan do |post_path|
+    posts = scan do |post_path|
       BlogPost.from_file(post_path)
     end
+    return posts.sort { |a,b| b.date <=> a.date }
   end
 
   def scan_and_store

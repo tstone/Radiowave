@@ -1,5 +1,6 @@
 
 class BlogPost
+  extend DataStorable
   attr_accessor :body, :comments, :path, :tags
 
   def initialize(&block)
@@ -41,7 +42,7 @@ class BlogPost
 
     BlogPost.new do |post|
       post.path = path
-      post.body = Markdown.render(content)
+      post.body = ::Markdown.render(content)
       post.set_attributes(parse_meta(meta, path))
     end
   end

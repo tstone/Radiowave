@@ -15,7 +15,7 @@ require "spec_helper"
     counter.should == fixture_files.length
   end
 
-  it "should return one populated blog post model for each blog post file" do
+  it "should return one populated blog post model for each blog post file, sorted by newest first" do
     posts = scanner.scan_and_parse
     posts.length.should == fixture_files.length
     posts.each do |post|

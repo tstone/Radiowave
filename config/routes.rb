@@ -46,4 +46,8 @@ Radiowave::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  root 'post#index'
+
+  resources :post, only: [:index, :show]
 end
