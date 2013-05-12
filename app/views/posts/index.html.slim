@@ -2,4 +2,5 @@
 - unless @posts.empty?
   ul
   	- for post in @posts do
-  		li = post.title
+  		li
+  			a href=post_path(post.slug) = post.title

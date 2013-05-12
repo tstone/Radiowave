@@ -34,6 +34,8 @@ class BlogPost
     return self
   end
 
+  alias :id :slug
+
   # --- class methods ----------------------------------------------------------
 
   def self.from_file(path)

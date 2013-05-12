@@ -25,7 +25,7 @@ require "spec_helper"
   end
 
   it "should return a store of parsed blog posts" do
-    scanner.scan_and_store.length.should == 3
+    scanner.scan_and_store.all.length.should == 3
   end
 
 end
