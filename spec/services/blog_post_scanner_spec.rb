@@ -24,8 +24,9 @@ require "spec_helper"
     end
   end
 
-  it "should return a store of parsed blog posts" do
-    scanner.scan_and_store.all.length.should == 3
+  it "should attach a store of parsed blog posts to the BlogPost model" do
+    scanner.scan_and_store
+    BlogPost.all.length.should == 3
   end
 
 end

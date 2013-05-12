@@ -13,12 +13,6 @@ describe BlogPost do
   xit "should allow the user to specify a default for enabling comments" do
   end
 
-  it "should call it's datastore if it doesn't know what to do with a message" do
-    store = MemoryStore.new([], BlogPost)
-    store.should_receive(:count)
-    BlogPost.count
-  end
-
   context "initializing from a file" do
 
     context "with all attributes specified" do

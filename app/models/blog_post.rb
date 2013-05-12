@@ -1,6 +1,6 @@
 
 class BlogPost
-  extend DataStorable
+  #extend DataStorable
   attr_accessor :body, :comments, :path, :tags
 
   def initialize(&block)

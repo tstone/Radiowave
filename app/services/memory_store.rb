@@ -1,10 +1,9 @@
 
-class MemoryStore
+module MemoryStore
 
-  def initialize(data, model)
+  def initialize_store(data)
     @list = data
     build_table(data)
-    inject_data_store(model)
   end
 
   def all
@@ -16,11 +15,6 @@ class MemoryStore
   end
 
   private # --------------------------------------------------------------------------------
-
-  def inject_data_store(model)
-    store = self
-    (class << model; self; end).instance_eval { define_method(:_data_store) { store } }
-  end
 
   def build_table(data)
     @table = {}

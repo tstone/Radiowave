@@ -20,7 +20,10 @@ class BlogPostScanner
   end
 
   def scan_and_store
-    MemoryStore.new(scan_and_parse, BlogPost)
+    posts = scan_and_parse
+    BlogPost.class.send(:include, MemoryStore)
+    BlogPost.initialize_store(posts)
+    posts
   end
 
 end
