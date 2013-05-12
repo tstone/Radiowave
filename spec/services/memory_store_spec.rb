@@ -1,22 +1,35 @@
 require "spec_helper"
 
 describe MemoryStore do
-  let(:data) {[ OpenStruct.new(id: 1, title: "1"), OpenStruct.new(id: 2, title: "2") ]}
-  let(:store) {
+  let(:data) do
+    [ mock_blog_post(title: "Post 1", slug: "post1"),
+      mock_blog_post(title: "Post 2", slug: "post2"),
+      mock_blog_post(title: "Post 3", slug: "post3") ]
+  end
+
+  let(:store) do
     unless defined? MemoryStoreTestObject
       MemoryStoreTestObject = Class.new
       MemoryStoreTestObject.class.send(:include, MemoryStore)
       MemoryStoreTestObject.initialize_store(data)
     end
     MemoryStoreTestObject
-  }
+  end
 
   it "should return all of the models" do
-    store.all.should =~ data
+    store.all.map(&:id) =~ data.map(&:id)
   end
 
   it "should find models by identifier" do
-    store.find(1).title.should == "1"
+    store.find("post1").id.should == "post1"
+    store.find("post1").title.should == "Post 1"
   end
 
+  it "should get the next model" do
+    store.next("post1").id.should == "post2"
+  end
+
+  it "should get the previous model" do
+    store.prev("post1").id.should == "post3"
+  end
 end

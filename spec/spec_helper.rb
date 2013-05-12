@@ -28,3 +28,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+def mock_blog_post(options={})
+  post = BlogPost.new
+  post.set_attributes(options)
+  post
+end
