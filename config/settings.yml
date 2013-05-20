@@ -9,8 +9,6 @@ author: Blog Author
 forcehost: true
 
 # Display Settings
-next:  Newer Posts
-prev:  Older Posts
 posttimeformat: MMMM d, yyyy
 
 # DISQUS Settings
