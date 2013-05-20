@@ -15,6 +15,7 @@ gem 'slim-rails'
 group :assets do
   gem 'sprockets-rails'
   gem 'sass-rails', '~> 4.0.0.rc1'
+  gem 'compass-rails'
   gem 'uglifier', '>= 1.3.0'
   gem 'coffee-rails', '~> 4.0.0'
 end

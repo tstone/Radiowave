@@ -1,6 +1,15 @@
 
 - unless @posts.empty?
-  ul
-		- for post in @posts do
-			li
-  			a href=post_path(post.slug) = post.title
+  ul.index
+  - for post in @posts do
+    li
+      a.title href=post_path(post.slug) = post.title
+      span.date= post.date.strftime("%B %d, %Y")
+      - if post.tags
+        ul.tags
+          - post.tags.each do |tag|
+            li
+              a = tag
+      - if Rails.application.config.settings.comments
+        span.comments data-disqus-identifier=post.slug
+          | 0 Comments
