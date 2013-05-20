@@ -1,6 +1,9 @@
 
 class BlogPost
+  include ActiveRecordLikeBehavior
+
   attr_accessor :body, :comments, :path, :tags
+  attr_writer :date, :slug, :title
 
   def initialize(&block)
     @comments = Rails.application.config.settings.comments
@@ -9,28 +12,21 @@ class BlogPost
   end
 
   def date
-    @date = File.ctime(@path) unless @date
+    @date = File.ctime(@path) if !@date and @path
     @date
   end
 
   def slug
-    @slug = title.parameterize unless @slug
+    @slug = title.parameterize if !@slug and title
     @slug
   end
 
   def title
-    unless @title
+    if !@title and @path
       @title = File.basename(@path, File.extname(@path))
       @title = @title.titleize
     end
     @title
-  end
-
-  def set_attributes(values)
-    values.each do |k,v|
-      instance_variable_set("@#{k}".to_sym, v)
-    end
-    return self
   end
 
   alias :id :slug

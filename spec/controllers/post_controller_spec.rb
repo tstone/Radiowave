@@ -7,41 +7,52 @@ describe PostsController do
 
   describe "index" do
     it "should get the first page of blog posts" do
-      BlogPost.should_receive(:page).with(0, 10).and_return((1..10).to_a)
+      BlogPost.should_receive(:page).with(0, 10).and_return([faux_blog_post])
       get :index
       assigns(:posts).should be_present
     end
 
     it "should get the second page of blog posts" do
-      BlogPost.should_receive(:page).with(10, 10).and_return((10..20).to_a)
+      BlogPost.should_receive(:page).with(10, 10).and_return([faux_blog_post])
       get :index, page: 2
       assigns(:posts).should be_present
     end
 
     it "should get the nth page of blog posts" do
-      BlogPost.should_receive(:page).with(490, 10).and_return((490..500).to_a)
+      BlogPost.should_receive(:page).with(490, 10).and_return([faux_blog_post])
       get :index, page: 50
       assigns(:posts).should be_present
+    end
+
+    it "should fetch the theme view" do
+      subject.should_receive(:themed_view_path).with("index").and_call_original
+      get :index
     end
   end
 
   describe "show" do
+    let(:post) { faux_blog_post }
+    before do
+      BlogPost.stub(:find).with("example").and_return(post)
+    end
+
     it "should get the specified the blog posts" do
-      BlogPost.should_receive(:find).with("example").and_return("post")
       get :show, id: "example"
-      assigns(:post).should be_present
+      assigns(:post).id.should == post.id
     end
 
     it "should get the previous blog post, relative to the specified id" do
-      BlogPost.should_receive(:prev).with("example").and_return("prev")
+      prev_post = faux_blog_post(title: "Next Post")
+      BlogPost.should_receive(:prev).with("example").and_return(prev_post)
       get :show, id: "example"
-      assigns(:prev_post).should be_present
+      assigns(:prev_post).id.should == prev_post.id
     end
 
     it "should get the next blog post, relative to the specified id" do
-      BlogPost.should_receive(:next).with("example").and_return("next")
+      next_post = faux_blog_post(title: "Next Post")
+      BlogPost.should_receive(:next).with("example").and_return(next_post)
       get :show, id: "example"
-      assigns(:next_post).should be_present
+      assigns(:next_post).id.should == next_post.id
     end
   end
 end
