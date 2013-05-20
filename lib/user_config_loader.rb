@@ -58,15 +58,17 @@ class UserConfigLoader
     end
 
     def rewrite_asset_paths
-      Rails.application.config.assets.paths = []
-      asset_paths.each { |p| add_asset_path(p, theme) } if theme
-      asset_paths.each { |p| add_asset_path(p, "default") } if !theme or theme != "default"
+      paths = []
+      asset_paths.each { |p| add_asset_path(paths, p, theme) } if theme
+      asset_paths.each { |p| add_asset_path(paths, p, "default") } if !theme or theme != "default"
+      paths = paths.uniq
+      Rails.application.config.assets.paths = paths.concat(Rails.application.config.assets.paths)
     end
 
-    def add_asset_path(p, theme)
+    def add_asset_path(paths, p, theme)
       path = Rails.root.join("themes", theme, "assets", p)
       if Dir.exists?(path)
-        Rails.application.config.assets.paths << path
+        paths << path
       end
     end
   end
