@@ -23,11 +23,6 @@ describe PostsController do
       get :index, page: 50
       assigns(:posts).should be_present
     end
-
-    it "should fetch the theme view" do
-      subject.should_receive(:themed_view_path).with("index").and_call_original
-      get :index
-    end
   end
 
   describe "show" do
