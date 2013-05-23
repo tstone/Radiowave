@@ -1,10 +1,12 @@
 doctype html
 html
-	head
-		title Radiowave
-		= stylesheet_link_tag "application", media: "all"
-		// - javascript_include_tag "application", "data-turbolinks-track" => true
-		// - csrf_meta_tags
+  head
+    title = settings.title
+    link href="http://fonts.googleapis.com/css?family=Raleway:900,200" rel="stylesheet" type="text/css"
+    = stylesheet_link_tag "application", media: "all"
+    // - javascript_include_tag "application", "data-turbolinks-track" => true
+    // - csrf_meta_tags
 
-	body
-	== yield
+  body
+    h1 = settings.title
+    == yield
